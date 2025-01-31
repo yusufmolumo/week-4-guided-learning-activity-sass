@@ -1,0 +1,162 @@
+// Typography Scale using fluid typography
+:root {
+    --font-scale-ratio: 1.25;
+    --font-size-base: 1rem;
+    
+    // Fluid type scale
+    --font-size-sm: #{fluid-type(0.875, 1, 0.875, 1)};
+    --font-size-base: #{fluid-type(1, 1.125, 1, 1.125)};
+    --font-size-lg: #{fluid-type(1.125, 1.25, 1.125, 1.25)};
+    --font-size-xl: #{fluid-type(1.25, 1.5, 1.25, 1.5)};
+    --font-size-2xl: #{fluid-type(1.5, 2, 1.5, 2)};
+    --font-size-3xl: #{fluid-type(2, 2.5, 2, 2.5)};
+    --font-size-4xl: #{fluid-type(2.5, 3, 2.5, 3)};
+    
+    // Line heights
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    
+    // Font weights
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    // Letter spacing
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+  }
+  
+  // Base typography styles
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+  }
+  
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  h1 {
+    font-size: var(--font-size-4xl);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  h2 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  h3 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  h4 {
+    font-size: var(--font-size-xl);
+  }
+  
+  h5 {
+    font-size: var(--font-size-lg);
+  }
+  
+  h6 {
+    font-size: var(--font-size-base);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+  
+  // Paragraphs
+  p {
+    margin-bottom: var(--spacing-md);
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // Lists
+  ul, ol {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+  }
+  
+  li {
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  // Inline text elements
+  strong {
+    font-weight: var(--font-weight-bold);
+  }
+  
+  em {
+    font-style: italic;
+  }
+  
+  // Links
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    
+    &:hover {
+      color: var(--color-primary-dark);
+      text-decoration: underline;
+    }
+  }
+  
+  // Blockquotes
+  blockquote {
+    font-size: var(--font-size-lg);
+    font-style: italic;
+    line-height: var(--line-height-relaxed);
+    padding-left: var(--spacing-lg);
+    border-left: 4px solid var(--color-primary);
+    margin: var(--spacing-lg) 0;
+    
+    cite {
+      display: block;
+      font-size: var(--font-size-base);
+      font-style: normal;
+      margin-top: var(--spacing-sm);
+      color: var(--color-text-light);
+    }
+  }
+  
+  // Code
+  code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background-color: var(--color-surface);
+    padding: 0.2em 0.4em;
+    border-radius: var(--border-radius-sm);
+  }
+  
+  // Small text
+  small {
+    font-size: var(--font-size-sm);
+  }
+  
+  // Article typography
+  article {
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-md);
+      
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    
+    p + h2,
+    p + h3 {
+      margin-top: var(--spacing-xl);
+    }
+  }

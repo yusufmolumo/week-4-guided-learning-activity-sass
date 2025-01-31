@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Doe - Creative Designer</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">Jane Doe</a>
+            <ul class="nav__list">
+                <li><a href="#" class="nav__link">Home</a></li>
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#projects" class="nav__link">Projects</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="theme-toggle__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <!-- Sun icon for dark mode -->
+                    <path class="sun" fill="currentColor" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    <!-- Moon icon for light mode -->
+                    <path class="moon" fill="currentColor" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero__title">Creative Designer & Developer</h1>
+                <p class="hero__subtitle">Crafting beautiful digital experiences with passion and purpose</p>
+                <div class="hero__cta">
+                    <a href="#projects" class="button button--primary">View My Work</a>
+                    <a href="#contact" class="button button--secondary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about__content">
+                    <div class="about__text">
+                        <p>I'm a creative designer and developer with a passion for crafting beautiful, functional digital experiences. With over 5 years of experience in the industry, I specialize in user interface design, user experience, and front-end development.</p>
+                        <div class="skills">
+                            <h3>Skills</h3>
+                            <div class="skills__grid">
+                                <div class="skill-card">
+                                    <h4>Design</h4>
+                                    <ul>
+                                        <li>UI/UX Design</li>
+                                        <li>Wireframing</li>
+                                        <li>Prototyping</li>
+                                        <li>Brand Identity</li>
+                                    </ul>
+                                </div>
+                                <div class="skill-card">
+                                    <h4>Development</h4>
+                                    <ul>
+                                        <li>HTML/CSS/JavaScript</li>
+                                        <li>React</li>
+                                        <li>Node.js</li>
+                                        <li>SASS/SCSS</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects__grid">
+                    <!-- Project cards will be added here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact__content">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="button button--primary">Send Message</button>
+                    </form>
+                    <div class="social-links">
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">GitHub</a>
+                        <a href="#" class="social-link">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Jane Doe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
