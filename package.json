@@ -1,0 +1,33 @@
+{
+  "name": "week-4-guided-learning-activity-sass",
+  "version": "1.0.0",
+  "description": "A responsive portfolio website built with SASS/SCSS, showcasing modern design principles and best practices in web development.",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass scss/main.scss:css/main.css",
+    "sass-watch": "sass --watch scss/main.scss:css/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yusuf Molumo",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.83.4"
+  },
+  "dependencies": {
+    "braces": "^3.0.3",
+    "chokidar": "^4.0.3",
+    "detect-libc": "^1.0.3",
+    "fill-range": "^7.1.1",
+    "immutable": "^5.0.3",
+    "is-extglob": "^2.1.1",
+    "is-glob": "^4.0.3",
+    "is-number": "^7.0.0",
+    "micromatch": "^4.0.8",
+    "node-addon-api": "^7.1.1",
+    "picomatch": "^2.3.1",
+    "readdirp": "^4.1.1",
+    "source-map-js": "^1.2.1",
+    "to-regex-range": "^5.0.1"
+  }
+}

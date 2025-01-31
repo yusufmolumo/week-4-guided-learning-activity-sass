@@ -1,0 +1,147 @@
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: var(--transition-normal);
+    
+    // Base card structure
+    &__header {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid rgba(var(--color-text), 0.1);
+    }
+    
+    &__body {
+      padding: var(--spacing-lg);
+    }
+    
+    &__footer {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-top: 1px solid rgba(var(--color-text), 0.1);
+    }
+    
+    // Card variations
+    &--hover {
+      cursor: pointer;
+      
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    &--shadow {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    &--border {
+      border: 1px solid rgba(var(--color-text), 0.1);
+    }
+    
+    // Project card specific styles
+    &--project {
+      .card__image {
+        position: relative;
+        padding-top: 56.25%; // 16:9 aspect ratio
+        
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .card__overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, 
+            rgba(0, 0, 0, 0.8), 
+            rgba(0, 0, 0, 0) 50%);
+          opacity: 0;
+          transition: var(--transition-normal);
+          
+          display: flex;
+          align-items: flex-end;
+          padding: var(--spacing-lg);
+          color: white;
+        }
+        
+        &:hover .card__overlay {
+          opacity: 1;
+        }
+      }
+      
+      .card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+        margin-top: var(--spacing-md);
+        
+        .tag {
+          padding: var(--spacing-xs) var(--spacing-sm);
+          background-color: var(--color-surface);
+          border-radius: var(--border-radius-sm);
+          font-size: var(--font-size-sm);
+          color: var(--color-text-light);
+        }
+      }
+    }
+    
+    // Skill card specific styles
+    &--skill {
+      text-align: center;
+      padding: var(--spacing-lg);
+      
+      .card__icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto var(--spacing-md);
+        color: var(--color-primary);
+      }
+      
+      .card__title {
+        margin-bottom: var(--spacing-sm);
+        font-weight: var(--font-weight-semibold);
+      }
+      
+      .card__description {
+        color: var(--color-text-light);
+        font-size: var(--font-size-sm);
+      }
+    }
+    
+    // Stats card specific styles
+    &--stats {
+      text-align: center;
+      padding: var(--spacing-lg);
+      
+      .card__number {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-xs);
+      }
+      
+      .card__label {
+        color: var(--color-text-light);
+        font-size: var(--font-size-sm);
+        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-wide);
+      }
+    }
+  }
+  
+  // Grid layout for cards
+  .cards-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    
+    @include respond-to('sm') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to('lg') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }

@@ -1,0 +1,42 @@
+// _section.scss
+.section {
+    padding: var(--spacing-xl) 0;
+  
+    &__container {
+      @include container;
+    }
+  
+    &__header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--spacing-xl);
+    }
+  
+    &__title {
+      @include heading-2;
+      margin-bottom: var(--spacing-md);
+    }
+  
+    &__description {
+      color: var(--color-text-muted);
+      font-size: var(--text-lg);
+    }
+  
+    &--gray {
+      background-color: var(--color-surface);
+    }
+  
+    &--small {
+      padding: var(--spacing-lg) 0;
+    }
+  
+    &--large {
+      padding: calc(var(--spacing-xl) * 2) 0;
+    }
+  
+    @include dark-theme {
+      &--gray {
+        background-color: var(--color-surface-dark);
+      }
+    }
+  }

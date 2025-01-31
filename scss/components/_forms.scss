@@ -1,0 +1,143 @@
+.form {
+    &-group {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    &-label {
+      display: block;
+      margin-bottom: var(--spacing-xs);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text);
+    }
+    
+    &-input {
+      width: 100%;
+      padding: var(--spacing-sm);
+      border: 2px solid var(--color-surface);
+      border-radius: var(--border-radius-md);
+      background-color: var(--color-background);
+      color: var(--color-text);
+      transition: var(--transition-fast);
+      
+      &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
+      }
+      
+      &::placeholder {
+        color: var(--color-text-light);
+      }
+      
+      &--error {
+        border-color: var(--color-error);
+        
+        &:focus {
+          box-shadow: 0 0 0 3px rgba(var(--color-error), 0.1);
+        }
+      }
+      
+      &[type="search"] {
+        padding-left: var(--spacing-xl);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: var(--spacing-sm) center;
+        background-size: var(--spacing-md);
+      }
+    }
+    
+    &-textarea {
+      @extend .form-input;
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    &-select {
+      @extend .form-input;
+      appearance: none;
+      padding-right: var(--spacing-xl);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--spacing-sm) center;
+      background-size: var(--spacing-md);
+    }
+    
+    &-checkbox,
+    &-radio {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      cursor: pointer;
+      
+      input {
+        appearance: none;
+        width: 1.25em;
+        height: 1.25em;
+        border: 2px solid var(--color-text-light);
+        border-radius: var(--border-radius-sm);
+        transition: var(--transition-fast);
+        
+        &:checked {
+          background-color: var(--color-primary);
+          border-color: var(--color-primary);
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 0.75em;
+        }
+        
+        &:focus {
+          outline: none;
+          border-color: var(--color-primary);
+          box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
+        }
+      }
+    }
+    
+    &-radio input {
+      border-radius: 50%;
+      
+      &:checked {
+        background-image: none;
+        
+        &::after {
+          content: '';
+          display: block;
+          width: 0.5em;
+          height: 0.5em;
+          margin: 0.25em;
+          border-radius: 50%;
+          background-color: white;
+        }
+      }
+    }
+    
+    &-error {
+      color: var(--color-error);
+      font-size: var(--font-size-sm);
+      margin-top: var(--spacing-xs);
+    }
+    
+    &-help {
+      color: var(--color-text-light);
+      font-size: var(--font-size-sm);
+      margin-top: var(--spacing-xs);
+    }
+  }
+  
+  // Form layout utilities
+  .form-row {
+    display: grid;
+    gap: var(--spacing-md);
+    
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+  }

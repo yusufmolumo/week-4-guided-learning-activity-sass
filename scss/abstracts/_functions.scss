@@ -1,313 +1,141 @@
-// Abstracts
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-
-// Base
-@import 'base/reset';
-@import 'base/typography';
-
-// Components
-@import 'components/buttons';
-@import 'components/forms';
-@import 'components/cards';
-@import 'components/social-links';
-
-// Layout
-@import 'layout/navigation';
-@import 'layout/grid';
-@import 'layout/header';
-@import 'layout/footer';
-
-// Pages
-@import 'pages/home';
-@import 'pages/about';
-@import 'pages/projects';
-@import 'pages/contact';
-
-// Base styles
-body {
-  font-family: var(--font-primary);
-  color: var(--color-text);
-  background-color: var(--color-background);
-  line-height: 1.5;
-  transition: var(--transition-normal);
+// Convert pixels to rem
+@function rem($pixels, $context: 16) {
+  @return #{$pixels/$context}rem;
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
+// Calculate fluid typography size
+@function fluid-type($min-vw, $max-vw, $min-size, $max-size) {
+  $slope: ($max-size - $min-size) / ($max-vw - $min-vw);
+  $y-intersection: -1 * $min-vw * $slope + $min-size;
   
-  @include respond-to('lg') {
-    padding: 0 var(--spacing-lg);
-  }
+  @return clamp(
+    #{$min-size}rem,
+    #{$y-intersection}rem + #{$slope * 100}vw,
+    #{$max-size}rem
+  );
 }
 
-.section-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  margin-bottom: var(--spacing-xl);
-  text-align: center;
+// Lighten color function
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
 }
 
-// Components
-.button {
-  @include button;
-  
-  &--primary {
-    @include button('primary');
-  }
-  
-  &--secondary {
-    @include button('secondary');
-  }
+// Darken color function
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
 }
 
-// Hero Section
-.hero {
-  @include flex(column);
-  min-height: calc(100vh - 80px);
-  padding: var(--spacing-xl) 0;
-  background-color: var(--color-surface);
-  
-  &__title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: var(--spacing-md);
-  }
-  
-  &__subtitle {
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    color: var(--color-text-light);
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto var(--spacing-xl);
-  }
-  
-  &__cta {
-    @include flex(row, center, center);
-    gap: var(--spacing-md);
-  }
+// Z-index management
+$z-indexes: (
+  "modal": 1000,
+  "overlay": 900,
+  "dropdown": 800,
+  "header": 700,
+  "footer": 600
+);
+
+@function z($key) {
+  @return map-get($z-indexes, $key);
 }
 
-// About Section
-.about {
-  padding: var(--spacing-xl) 0;
+// Spacing calculator
+@function spacing($multiplier) {
+  $base-spacing: 0.25rem;
+  @return $base-spacing * $multiplier;
+}
+
+// Color palette generator
+@function generate-palette($base-color, $steps: 5) {
+  $palette: ();
   
-  &__content {
-    @include grid(1, var(--spacing-lg));
+  @for $i from 1 through $steps {
+    $lighter: tint($base-color, (100 - ($i * 20)));
+    $darker: shade($base-color, ($i * 20));
     
-    @include respond-to('md') {
-      grid-template-columns: 1fr 1fr;
-    }
+    $palette: map-merge($palette, (
+      "lighter-#{$i}": $lighter,
+      "darker-#{$i}": $darker
+    ));
   }
   
-  &__text {
-    p {
-      margin-bottom: var(--spacing-lg);
-      font-size: 1.1rem;
-    }
-  }
+  @return $palette;
 }
 
-// Skills
-.skills {
-  &__grid {
-    @include grid(1, var(--spacing-md));
-    
-    @include respond-to('sm') {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
+// Calculate contrast ratio
+@function contrast-ratio($color) {
+  $luminance: 0.2126 * red($color) + 0.7152 * green($color) + 0.0722 * blue($color);
+  
+  @return if($luminance > 128, var(--color-text), white);
 }
 
-.skill-card {
-  @include card;
-  
-  h4 {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-md);
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    
-    li {
-      margin-bottom: var(--spacing-sm);
-      color: var(--color-text-light);
-    }
-  }
+// Calculate aspect ratio
+@function aspect-ratio($width, $height) {
+  @return percentage($height / $width);
 }
 
-// Projects Section
-.projects {
-  padding: var(--spacing-xl) 0;
-  background-color: var(--color-surface);
-  
-  &__grid {
-    @include grid(1, var(--spacing-lg));
-    
-    @include respond-to('md') {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @include respond-to('lg') {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
+// Grid column calculator
+@function grid-column($span, $total: 12) {
+  @return percentage($span / $total);
 }
 
-.project-card {
-  @include card;
+// Media query breakpoint calculator
+@function breakpoint($size) {
+  $breakpoints: (
+    "xs": 320px,
+    "sm": 640px,
+    "md": 768px,
+    "lg": 1024px,
+    "xl": 1280px,
+    "2xl": 1536px
+  );
   
-  &__image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: var(--border-radius-md);
-    margin-bottom: var(--spacing-md);
-  }
-  
-  &__title {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-sm);
-  }
-  
-  &__description {
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-md);
-  }
+  @return map-get($breakpoints, $size);
 }
 
-// Contact Section
-.contact {
-  padding: var(--spacing-xl) 0;
-  
-  &__content {
-    @include grid(1, var(--spacing-xl));
-    
-    @include respond-to('md') {
-      grid-template-columns: 2fr 1fr;
-    }
-  }
+// Calculate golden ratio
+@function golden-ratio($value, $increment) {
+  $ratio: 1.618034;
+  @return $value * pow($ratio, $increment);
 }
 
-.contact-form {
-  .form-group {
-    margin-bottom: var(--spacing-md);
-    
-    label {
-      display: block;
-      margin-bottom: var(--spacing-xs);
-      font-weight: 500;
+// Power function for calculations
+@function pow($base, $exponent) {
+  $result: 1;
+  
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $result: $result * $base;
     }
-    
-    input,
-    textarea {
-      width: 100%;
-      padding: var(--spacing-sm);
-      border: 1px solid var(--color-text-light);
-      border-radius: var(--border-radius-sm);
-      background-color: var(--color-background);
-      color: var(--color-text);
-      
-      &:focus {
-        outline: none;
-        border-color: var(--color-primary);
-      }
-    }
-    
-    textarea {
-      min-height: 150px;
-      resize: vertical;
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $result: $result / $base;
     }
   }
+  
+  @return $result;
 }
 
-.social-links {
-  @include flex(column);
-  gap: var(--spacing-md);
+// Calculate relative luminance
+@function luminance($color) {
+  $red: red($color) / 255;
+  $green: green($color) / 255;
+  $blue: blue($color) / 255;
   
-  .social-link {
-    @include button('secondary');
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-  }
+  $red: if($red <= 0.03928, $red/12.92, pow(($red + 0.055)/1.055, 2.4));
+  $green: if($green <= 0.03928, $green/12.92, pow(($green + 0.055)/1.055, 2.4));
+  $blue: if($blue <= 0.03928, $blue/12.92, pow(($blue + 0.055)/1.055, 2.4));
+  
+  @return $red * 0.2126 + $green * 0.7152 + $blue * 0.0722;
 }
 
-// Footer
-.footer {
-  padding: var(--spacing-lg) 0;
-  background-color: var(--color-surface);
-  text-align: center;
+// Calculate color contrast
+@function color-contrast($background, $color1: white, $color2: black) {
+  $background-luminance: luminance($background);
+  $color1-luminance: luminance($color1);
+  $color2-luminance: luminance($color2);
   
-  p {
-    color: var(--color-text-light);
-  }
-}
-
-// Navigation
-.nav {
-  @include flex(row, space-between, center);
-  height: 80px;
+  $contrast1: abs($background-luminance - $color1-luminance);
+  $contrast2: abs($background-luminance - $color2-luminance);
   
-  &__logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    color: var(--color-text);
-  }
-  
-  &__list {
-    @include flex(row);
-    gap: var(--spacing-lg);
-    list-style: none;
-    
-    @include respond-to('md') {
-      display: flex;
-    }
-  }
-  
-  &__link {
-    text-decoration: none;
-    color: var(--color-text);
-    font-weight: 500;
-    transition: var(--transition-fast);
-    
-    &:hover {
-      color: var(--color-primary);
-    }
-  }
-}
-
-// Theme toggle
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-text);
-  
-  &__icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .moon {
-    display: none;
-  }
-  
-  [data-theme="dark"] & {
-    .sun {
-      display: none;
-    }
-    
-    .moon {
-      display: block;
-    }
-  }
+  @return if($contrast1 > $contrast2, $color1, $color2);
 }

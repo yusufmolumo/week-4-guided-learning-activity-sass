@@ -1,0 +1,61 @@
+// _header.scss
+.header {
+    padding-top: calc(var(--nav-height) + var(--spacing-xl));
+    padding-bottom: var(--spacing-xl);
+    text-align: center;
+    background-color: var(--color-background);
+    
+    &__container {
+      @include container;
+    }
+  
+    &__title {
+      @include heading-1;
+      margin-bottom: var(--spacing-md);
+    }
+  
+    &__subtitle {
+      @include heading-4;
+      color: var(--color-text-muted);
+      max-width: 600px;
+      margin: 0 auto var(--spacing-lg);
+    }
+  
+    &__actions {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+    }
+  
+    // Hero variation
+    &--hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(
+        to bottom right,
+        var(--color-background),
+        var(--color-surface)
+      );
+  
+      .header__title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        line-height: 1.1;
+        margin-bottom: var(--spacing-lg);
+      }
+    }
+  
+    @include dark-theme {
+      background-color: var(--color-background-dark);
+  
+      &--hero {
+        background: linear-gradient(
+          to bottom right,
+          var(--color-background-dark),
+          var(--color-surface-dark)
+        );
+      }
+    }
+  }

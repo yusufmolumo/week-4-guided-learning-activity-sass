@@ -1,0 +1,93 @@
+.social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    
+    // Container variations
+    &--vertical {
+      flex-direction: column;
+    }
+    
+    &--center {
+      justify-content: center;
+    }
+    
+    // Individual social link
+    &__item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--color-surface);
+      color: var(--color-text);
+      transition: var(--transition-normal);
+      
+      &:hover {
+        transform: translateY(-2px);
+        background-color: var(--color-primary);
+        color: white;
+      }
+      
+      // Size variations
+      &--sm {
+        width: 2rem;
+        height: 2rem;
+        
+        svg {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+      
+      &--lg {
+        width: 3rem;
+        height: 3rem;
+        
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+      
+      // Platform-specific styles
+      &--github:hover {
+        background-color: #333;
+      }
+      
+      &--twitter:hover {
+        background-color: #1DA1F2;
+      }
+      &--linkedin:hover {
+        background-color: #0077B5;
+      }
+      
+      &--dribbble:hover {
+        background-color: #EA4C89;
+      }
+      
+      &--instagram:hover {
+        background-color: #E4405F;
+      }
+    }
+    // Icon styles
+    &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+    }
+    // Label styles (for accessibility)
+    &__label {
+    @include visually-hidden;
+    }
+    // Dark theme adjustments
+    @include dark-theme {
+    &__item {
+    background-color: var(--color-surface-dark);
+    color: var(--color-text-dark);
+    &:hover {
+        background-color: var(--color-primary-dark);
+      }
+    }
+}
+}
